@@ -9,6 +9,7 @@ class GroupsController < ApplicationController
   def render_commands
     render text: `#{params.require('name')} some optional text`
     render json: `#{params.require('name')} some optional text`
+    render(TestRenderer.new(params.require('name')))
   end
 
   def squish_sql
@@ -50,5 +51,15 @@ class GroupsController < ApplicationController
     if Rails.env.development?
       eval(params[:x]) # should not warn
     end
+  end
+end
+
+class TestRenderer
+  def initialize(prop)
+    @prop = prop
+  end
+
+  def render_in
+    @prop
   end
 end
