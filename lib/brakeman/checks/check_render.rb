@@ -1,4 +1,5 @@
 require 'brakeman/checks/base_check'
+require "byebug"
 
 #Check calls to +render()+ for dangerous values
 class Brakeman::CheckRender < Brakeman::BaseCheck
@@ -51,12 +52,14 @@ class Brakeman::CheckRender < Brakeman::BaseCheck
 
       message = msg("Render path contains ", msg_input(input))
 
-      warn :result => result,
+      w = warn :result => result,
         :warning_type => "Dynamic Render Path",
         :warning_code => :dynamic_render_path,
         :message => message,
         :user_input => input,
         :confidence => confidence
+      byebug
+      w
     end
   end
 
@@ -94,4 +97,4 @@ class Brakeman::CheckRender < Brakeman::BaseCheck
       end
     end
   end
-end 
+end

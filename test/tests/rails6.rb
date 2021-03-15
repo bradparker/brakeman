@@ -432,6 +432,38 @@ class Rails6Tests < Minitest::Test
       :user_input => s(:call, s(:params), :require, s(:str, "name"))
   end
 
+  ##<Brakeman::Warning:0x00007f93c62a05b0
+  # @view_name=nil,
+  # @called_from=nil,
+  # @check="Brakeman::CheckRender",
+  # @class=:GroupsController,
+  # @code=s(:render, :action, s(:call, s(:const, :TestRenderer), :new, s(:call, s(:params), :require, s(:str, "name"))), s(:hash)),
+  # @controller=nil,
+  # @file=#<Brakeman::FilePath:0x00007f93c518f3e8
+  # @absolute="/Users/brad.parker/Code/presidentbeef/brakeman/test/apps/rails6/app/controllers/groups_controller.rb",
+  # @relative="app/controllers/groups_controller.rb",
+  # @hash=-1960073880714379846>,
+  # @gem_info=nil,
+  # @line=12,
+  # @link=nil,
+  # @link_path=nil,
+  # @message=#<Brakeman::Messages::Message:0x00007f93c62a0740
+  # @parts=[#<Brakeman::Messages::Plain:0x00007f93c62a0768
+  # @value="Render path contains ">, #<Brakeman::Messages::Input:0x00007f93c62a0880
+  # @input=#<struct Brakeman::BaseCheck::Match type=:params, match=s(:call, s(:params), :require, s(:str, "name"))>,
+  # @value="parameter value">]>,
+  # @method=:render_commands,
+  # @model=nil,
+  # @template=nil,
+  # @user_input=s(:call, s(:params), :require, s(:str, "name")),
+  # @warning_set=:warning,
+  # @warning_type="Dynamic Render Path",
+  # @confidence=2,
+  # @warning_code=15,
+  # @format_message=nil,
+  # @row=nil,
+  # @user_input_type=:params>
+
   def test_dynamic_render_path_dir_glob_filter
     assert_no_warning :type => :warning,
       :warning_code => 15,
